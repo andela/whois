@@ -1,0 +1,31 @@
+{
+  "name": "whois",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "nodemon ./server.js --exec babel-node --watch ./server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IAMOTZ/whois.git"
+  },
+  "author": "Tunmise",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IAMOTZ/whois/issues"
+  },
+  "homepage": "https://github.com/IAMOTZ/whois#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.2.0",
+    "express": "^4.16.4",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.7"
+  }
+}
