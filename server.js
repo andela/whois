@@ -1,40 +1,38 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
-import dotEnv from 'dotenv';
 import axios from 'axios';
-
-dotEnv.config();
+import Andelan from './lib/andelan';
+import * as middlewares from './middlewares';
 
 const server = express();
-const slackToken = process.env.SLACK_TOKEN;
 
 server.use(logger('dev'));
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: false }));
 
-server.post('/', async (req, res) => {
-
-  const { text, response_url } = req.body;
-
-  if (!text) {
-    return res
-      .json({ "response_type": "ephemeral", "text": "You are not using the command correcty" })
-      .status(200)
-      .end();
+server.post('/slash-command',
+  middlewares.validateSlashCommand,
+  middlewares.extractSubCommands,
+  middlewares.getUserMail,
+  async (req, res) => {
+    let userData, userSkills;
+    try {
+      userData = await Andelan.getUserWithEmail(res.locals.userEmail);
+      userSkills = await Andelan.getSkillsWithId(userData.id);
+    } catch (error) {
+      return middlewares.badResponse(req.body.response_url, ':cry: Something went wrong');
+    }
+    const andelan = new Andelan(userData, userSkills);
+    const slackResponse = { attachments: [] };
+    res.locals.subCommands.forEach(command => slackResponse.attachments.push(eval(`andelan.${command}`)));
+    axios.post(req.body.response_url, JSON.stringify(slackResponse));
   }
-  const userIdMatch = text.match(/^.*?<@(.+?)\|.*?>.*$/);
-  const userId = userIdMatch ? userIdMatch[1] : null;
-  if (!userId) {
-    return res
-      .json({ "response_type": "ephemeral", "text": "You are not using the command correcty" })
-      .status(200)
-      .end();
-  }
-  res.json({ "response_type": "ephemeral", "text": "I am still in development process" }).status(200).end();
-});
+);
 
-const port = 8888;
+server.post('/ping', (req, res) => res.json({ message: 'I am Alive!'}).end());
+
+const port = 8008;
 
 server.listen(port, () => {
   console.log(`App started on port ${port}`);
