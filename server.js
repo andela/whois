@@ -16,21 +16,21 @@ server.post('/slash-command',
   middlewares.extractSubCommands,
   middlewares.getUserMail,
   async (req, res) => {
-    let userData, userSkills;
+    let userData;
+    let userSkills;
     try {
       userData = await Andelan.getUserWithEmail(res.locals.userEmail);
       userSkills = await Andelan.getSkillsWithId(userData.id);
     } catch (error) {
-      return middlewares.badResponse(req.body.response_url, ':cry: Something went wrong');
+      return middlewares.badResponse(req.body.response_url, ':cry: Something went wrong3');
     }
     const andelan = new Andelan(userData, userSkills);
     const slackResponse = { attachments: [] };
-    res.locals.subCommands.forEach(command => slackResponse.attachments.push(eval(`andelan.${command}`)));
-    axios.post(req.body.response_url, JSON.stringify(slackResponse));
-  }
-);
+    res.locals.subCommands.forEach(command => slackResponse.attachments.push(andelan[command]));
+    return axios.post(req.body.response_url, JSON.stringify(slackResponse));
+  });
 
-server.post('/ping', (req, res) => res.json({ message: 'I am Alive!'}).end());
+server.post('/ping', (req, res) => res.json({ message: 'I am Alive!' }).end());
 
 const port = 8008;
 

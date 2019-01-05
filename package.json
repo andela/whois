@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:dev": "nodemon ./server.js --exec babel-node"
+    "start:dev": "nodemon ./server.js --exec babel-node",
+    "lint": "eslint ./**.js"
   },
   "repository": {
     "type": "git",
@@ -28,5 +29,10 @@
     "morgan": "^1.9.1",
     "nodemon": "^1.18.7",
     "slackify-html": "^1.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.12.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0"
   }
 }
