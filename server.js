@@ -20,9 +20,15 @@ server.post('/slash-command',
     let userSkills;
     try {
       userData = await Andelan.getUserWithEmail(res.locals.userEmail);
+      if (!userData) {
+        return middlewares.badResponse(
+          req.body.response_url,
+          'Sorry :disappointed:, this user does not have a profile on AIS.',
+        );
+      }
       userSkills = await Andelan.getSkillsWithId(userData.id);
     } catch (error) {
-      return middlewares.badResponse(req.body.response_url, ':cry: Something went wrong3');
+      return middlewares.badResponse(req.body.response_url, ':cry: Something went wrong');
     }
     const andelan = new Andelan(userData, userSkills);
     const slackResponse = { attachments: [] };
