@@ -1,5 +1,6 @@
 import axios from 'axios';
 import dotEnv from 'dotenv';
+import Andelan from './lib/andelan';
 
 dotEnv.config();
 
@@ -26,7 +27,7 @@ export const validateSlashCommand = (req, res, next) => {
       .end();
   }
   res.locals.userId = userId;
-  res.json({ response_type: 'ephemeral', text: 'Fetching' }).status(200).end();
+  res.json({ response_type: 'ephemeral', text: 'Fetching user info ...:run-edd:' }).status(200).end();
   return next();
 };
 
@@ -55,4 +56,35 @@ export const getUserMail = async (req, res, next) => {
       return next();
     })
     .catch(() => badResponse(responseUrl, ':cry: Something went wrong.'));
+};
+
+export const getUserInfo = async (req, res, next) => {
+  let userData;
+  let userSkills;
+  try {
+    userData = await Andelan.getUserWithEmail(res.locals.userEmail);
+    if (!userData) {
+      return badResponse(
+        req.body.response_url,
+        'Sorry :disappointed:, this user does not have a profile on AIS.',
+      );
+    }
+    if (Andelan.isFellow(userData.roles)) {
+      userSkills = await Andelan.getSkillsWithId(userData.id);
+    } else {
+      const subCommands = res.locals.subCommands.filter(command => ['profile', 'bio'].includes(command));
+      if (!subCommands.length) {
+        return badResponse(
+          req.body.response_url,
+          `Sorry :neutral_face:, you can't query the *_${res.locals.subCommands.join(' or ')}_* of a non-fellow.`,
+        );
+      }
+      res.locals.subCommands = subCommands;
+    }
+  } catch (error) {
+    return badResponse(req.body.response_url, ':cry: Something went wrong1');
+  }
+  res.locals.userData = userData;
+  res.locals.userSkills = userSkills;
+  return next();
 };
