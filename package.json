@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "8.11.1"
+  },
   "scripts": {
     "start:dev": "nodemon ./server.js --exec babel-node",
     "test": "jest --coverage",

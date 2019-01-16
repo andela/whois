@@ -26,7 +26,7 @@ server.post('/slash-command',
 
 server.post('/ping', (req, res) => res.json({ message: 'I am Alive!' }).end());
 
-const port = 8008;
+const port = process.env.PORT || 8008;
 
 server.listen(port, () => {
   console.log(`App started on port ${port}`);
