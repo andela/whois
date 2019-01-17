@@ -25,10 +25,11 @@
   "homepage": "https://github.com/IAMOTZ/whois#readme",
   "jest": {
     "collectCoverageFrom": [
-      "**/*.{js}",
+      "src/**/*.{js}",
       "!**/node_modules/**",
       "!**/coverage/**",
-      "!**/tests/**"
+      "!**/tests/**",
+      "!**/build/**"
     ]
   },
   "dependencies": {
@@ -46,6 +47,8 @@
   },
   "devDependencies": {
     "@babel/node": "^7.2.2",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
     "eslint": "^5.12.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
