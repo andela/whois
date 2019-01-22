@@ -30,7 +30,8 @@
       "!**/coverage/**",
       "!**/tests/**",
       "!**/build/**"
-    ]
+    ],
+    "testEnvironment": "node"
   },
   "dependencies": {
     "@babel/cli": "^7.2.3",

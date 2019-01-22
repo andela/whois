@@ -4,8 +4,7 @@ import * as attachments from './attachments';
 
 dotenv.config();
 
-axios.defaults.headers.common = { 'api-token': process.env.API_TOKEN };
-axios.defaults.baseURL = process.env.API_BASE_URL;
+const baseURL = process.env.API_BASE_URL;
 
 export default class Andelan {
   constructor(userData, userSkills) {
@@ -72,13 +71,17 @@ export default class Andelan {
 
   static getUserWithEmail(email) {
     return axios
-      .get(`api/v1/users?email=${email}`)
+      .get(`${baseURL}/api/v1/users?email=${email}`, {
+        headers: { 'api-token': process.env.API_TOKEN },
+      })
       .then(response => response.data.values[0]);
   }
 
   static getSkillsWithId(id) {
     return axios
-      .get(`api/v1/skills/tech/developerskills/${id}`)
+      .get(`${baseURL}/api/v1/skills/tech/developerskills/${id}`, {
+        headers: { 'api-token': process.env.API_TOKEN },
+      })
       .then(response => response.data.skills);
   }
 
