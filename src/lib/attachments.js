@@ -4,7 +4,7 @@ const removeEmptyFields = fields => (
   fields.filter(field => field.value && field.value.trim() && field.value.toLowerCase() !== 'n/a')
 );
 
-const capitalize = word => `${word[0].toUpperCase()}${word.substr(1)}`;
+export const capitalize = word => `${word[0].toUpperCase()}${word.substr(1)}`;
 
 export const profileTemplate = (profile) => {
   const {

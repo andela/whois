@@ -1,5 +1,7 @@
 export const userData = {
   name: 'mock-name',
+  first_name: 'mock-first-name',
+  last_name: 'mock-last-name',
   cohort: 'mock-cohort',
   email: 'mock-email',
   github: 'mock-github',

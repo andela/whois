@@ -13,6 +13,11 @@ export default class Andelan {
     this.userSkills = userSkills;
   }
 
+  get fullName() {
+    const { first_name: firstName, last_name: lastName } = this.userData;
+    return `${attachments.capitalize(firstName)} ${attachments.capitalize(lastName)}`;
+  }
+
   get profile() {
     const {
       cohort, email, github, location, level, roles, phone_number: phoneNumber, name,

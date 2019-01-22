@@ -19,7 +19,10 @@ server.post('/slash-command',
   async (req, res) => {
     const { userData, userSkills } = res.locals;
     const andelan = new Andelan(userData, userSkills);
-    const slackResponse = { attachments: [] };
+    const slackResponse = {
+      text: `*_This is ${andelan.fullName}:_*`,
+      attachments: [],
+    };
     res.locals.subCommands.forEach(command => slackResponse.attachments.push(andelan[command]));
     return axios.post(req.body.response_url, JSON.stringify(slackResponse));
   });

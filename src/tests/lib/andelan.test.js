@@ -50,11 +50,28 @@ describe('Andelan Class', () => {
         });
       });
     });
+    describe('isFellow', () => {
+      it('class Andelan should have static method "isFellow"', () => {
+        expect(typeof Andelan.isFellow).toBe('function');
+      });
+      it('should return false for Andelan that does not have a role of "fellow"', () => {
+        const roles = [{ name: 'TTL' }, { name: 'DevOps' }];
+        expect(Andelan.isFellow(roles)).toBeFalsy();
+      });
+      it('should return true for Andelan that has a role of "fellow"', () => {
+        const roles = [{ name: 'TTL' }, { name: 'Fellow' }];
+        expect(Andelan.isFellow(roles)).toBeTruthy();
+      });
+    });
   });
   describe('Class methods', () => {
     andelan = new Andelan(mockData.userData, mockData.userSkills);
     it('should instantiate without error', () => {
       expect(typeof andelan).toBe('object');
+    });
+    it('should return Andelan full name', () => {
+      const { fullName } = andelan;
+      expect(fullName).toEqual('Mock-first-name Mock-last-name');
     });
     it('should return Andelan profile', () => {
       const profileTemplate = sinon.stub(attachments, 'profileTemplate');
@@ -75,6 +92,10 @@ describe('Andelan Class', () => {
       const skillsTemplate = sinon.stub(attachments, 'skillsTemplate');
       void andelan.skills; // eslint-disable-line no-void
       expect(skillsTemplate.calledOnceWith(mockData.skillsData)).toBeTruthy();
+    });
+    it('should return Andelan skills as null if Andelan is instantiated without skill data', () => {
+      const andelanWithoutSkill = new Andelan(mockData.userData, null);
+      expect(andelanWithoutSkill.skills).toBeNull();
     });
   });
 });
