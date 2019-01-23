@@ -1,4 +1,4 @@
-# Andela `who-is` Slack App [![Build Status](https://travis-ci.org/IAMOTZ/whois.svg?branch=develop)](https://travis-ci.org/IAMOTZ/whois) [![Coverage Status](https://coveralls.io/repos/github/IAMOTZ/whois/badge.svg?branch=develop)](https://coveralls.io/github/IAMOTZ/whois?branch=develop)
+# Andela `who-is` Slack App [![Build Status](https://travis-ci.org/IAMOTZ/whois.svg?branch=develop)](https://travis-ci.org/IAMOTZ/whois)
 A slack app in form of [slash command](https://api.slack.com/slash-commands) that helps to collate and present data about Andelans using Andela information services.
 
 ## How to use it
