@@ -18,8 +18,9 @@ export const validateSlashCommand = (req, res, next) => {
       .status(200)
       .end();
   }
-  const userIdMatch = text.match(/^.*?<@(.+?)\|.*?>.*$/);
-  const userId = userIdMatch ? userIdMatch[1] : null;
+  const userMatch = text.match(/^.*?(<@(.+?)\|.*?>).*$/);
+  const userHandle = userMatch ? userMatch[1] : null;
+  const userId = userMatch ? userMatch[2] : null;
   if (!userId) {
     return res
       .json({ response_type: 'ephemeral', text: 'You are not using the command correcty' })
@@ -27,7 +28,8 @@ export const validateSlashCommand = (req, res, next) => {
       .end();
   }
   res.locals.userId = userId;
-  res.json({ response_type: 'ephemeral', text: 'Fetching user info ...:run-edd:' }).status(200).end();
+  res.locals.userHandle = userHandle;
+  res.json({ response_type: 'ephemeral', text: `Gethering ${userHandle} data. This might take some seconds.` }).status(200).end();
   return next();
 };
 

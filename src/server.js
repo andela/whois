@@ -20,7 +20,7 @@ server.post('/slash-command',
     const { userData, userSkills } = res.locals;
     const andelan = new Andelan(userData, userSkills);
     const slackResponse = {
-      text: `*_This is ${andelan.fullName}:_*`,
+      text: `*_This is ${andelan.fullName}(${res.locals.userHandle}):_*`,
       attachments: [],
     };
     res.locals.subCommands.forEach(command => slackResponse.attachments.push(andelan[command]));
