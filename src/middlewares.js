@@ -6,6 +6,32 @@ dotEnv.config();
 
 const slackToken = process.env.SLACK_TOKEN;
 
+const response = {
+  incorrectCommand: `
+    You are not using the command correcty.
+    Try \`/whois help\` to see the list of commands
+    `.trim(),
+
+  help: `
+    *Available commands*
+    \`/whois [handle]\`
+    _Get full details of an Andelan_
+
+    \`/whois [handle] profile\`
+    _Get the profile of an Andelan_
+
+    \`/whois [handle] bio\`
+    _Get the bio of an Andelan_
+
+    \`/whois [handle] skills\`
+    _Get the skills of an Andelan(fellow)_
+
+    \`/whois [handle] placement\`
+    _Get the placement details of an Andelan(fellow)_
+
+    `.trim(),
+};
+
 export const badResponse = (responseUrl, message = '') => (
   axios.post(responseUrl, JSON.stringify({ text: message }))
 );
@@ -14,17 +40,15 @@ export const validateSlashCommand = (req, res, next) => {
   const { text } = req.body;
   if (!text) {
     return res
-      .json({ response_type: 'ephemeral', text: 'You are not using the command correcty\n\nTry `/whois help` to see the list of commands' })
+      .json({ response_type: 'ephemeral', text: response.incorrectCommand })
       .status(200)
       .end();
   }
 
   // send back a list of commands if the user enters "/whois help"
   if (text === 'help') {
-    const HELP_TEXT = '*Available commands*\n`/whois [handle]`\n_Get full details of an Andelan_\n\n\n`/whois [handle] profile`\n_Get the profile of an Andelan_\n\n\n`/whois [handle] bio`\n_Get the bio of an Andelan_\n\n\n`/whois [handle] skills`\n_Get the skills of an Andelan(fellow)_\n\n\n`/whois [handle] placement`\n_Get the placement details of an Andelan(fellow)_\n\n\n';
-
     return res
-      .json({ response_type: 'ephemeral', text: HELP_TEXT })
+      .json({ response_type: 'ephemeral', text: response.help })
       .status(200)
       .end();
   }
@@ -34,7 +58,7 @@ export const validateSlashCommand = (req, res, next) => {
   const userId = userMatch ? userMatch[2] : null;
   if (!userId) {
     return res
-      .json({ response_type: 'ephemeral', text: 'You are not using the command correcty\n\nTry `/whois help` to see the list of commands' })
+      .json({ response_type: 'ephemeral', text: response.incorrectCommand })
       .status(200)
       .end();
   }
