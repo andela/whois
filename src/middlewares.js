@@ -14,16 +14,27 @@ export const validateSlashCommand = (req, res, next) => {
   const { text } = req.body;
   if (!text) {
     return res
-      .json({ response_type: 'ephemeral', text: 'You are not using the command correcty' })
+      .json({ response_type: 'ephemeral', text: 'You are not using the command correcty\n\nTry `/whois help` to see the list of commands' })
       .status(200)
       .end();
   }
+
+  // send back a list of commands if the user enters "/whois help"
+  if (text === 'help') {
+    const HELP_TEXT = '*Available commands*\n`/whois [handle]`\n_Get full details of an Andelan_\n\n\n`/whois [handle] profile`\n_Get the profile of an Andelan_\n\n\n`/whois [handle] bio`\n_Get the bio of an Andelan_\n\n\n`/whois [handle] skills`\n_Get the skills of an Andelan(fellow)_\n\n\n`/whois [handle] placement`\n_Get the placement details of an Andelan(fellow)_\n\n\n';
+
+    return res
+      .json({ response_type: 'ephemeral', text: HELP_TEXT })
+      .status(200)
+      .end();
+  }
+
   const userMatch = text.match(/^.*?(<@(.+?)\|.*?>).*$/);
   const userHandle = userMatch ? userMatch[1] : null;
   const userId = userMatch ? userMatch[2] : null;
   if (!userId) {
     return res
-      .json({ response_type: 'ephemeral', text: 'You are not using the command correcty' })
+      .json({ response_type: 'ephemeral', text: 'You are not using the command correcty\n\nTry `/whois help` to see the list of commands' })
       .status(200)
       .end();
   }

@@ -8,11 +8,11 @@ The slack app is exposed on [andela-slack-workspace](https://andela.slack.com) t
 
 | Command | Result | Andela API Service |
 | --- | --- | --- |
-| `/who-is <user-handle>` | Get full(profile, bio, skills, placement) details about an Andelan  |  `User`, `Skill` 
-| `/who-is <user-handle> profile` | Get `profile` of an Andelan | `User` |  
-| `/who-is <user-handle> bio` | Get `bio` of an Andelan | `User` |
-| `/who-is <user-handle> skills`| Get `skills` of an Andelan(Fellow only) | `Skill` 
-| `/who-is <user-handle> placement`| Get `placement` of an Andelan(Fellow only) | `User` |
+| `/whois <user-handle>` | Get full(profile, bio, skills, placement) details about an Andelan  |  `User`, `Skill` 
+| `/whois <user-handle> profile` | Get `profile` of an Andelan | `User` |  
+| `/whois <user-handle> bio` | Get `bio` of an Andelan | `User` |
+| `/whois <user-handle> skills`| Get `skills` of an Andelan(Fellow only) | `Skill` 
+| `/whois <user-handle> placement`| Get `placement` of an Andelan(Fellow only) | `User` |
 
 ## How to set it up
 If you would like to set up the slack app locally and play-around/contribute to the project, follow the instructions below:
