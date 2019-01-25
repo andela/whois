@@ -8,28 +8,28 @@ const slackToken = process.env.SLACK_TOKEN;
 
 const response = {
   incorrectCommand: `
-    You are not using the command correcty.
-    Try \`/whois help\` to see the list of commands
-    `.trim(),
+You are not using the command correcty.
+Try \`/whois help\` to see the list of commands
+`.trim(),
 
   help: `
-    *Available commands*
-    \`/whois [handle]\`
-    _Get full details of an Andelan_
+*Available commands*
+\`/whois [handle]\`
+_Get full details of an Andelan_
 
-    \`/whois [handle] profile\`
-    _Get the profile of an Andelan_
+\`/whois [handle] profile\`
+_Get the profile of an Andelan_
 
-    \`/whois [handle] bio\`
-    _Get the bio of an Andelan_
+\`/whois [handle] bio\`
+_Get the bio of an Andelan_
 
-    \`/whois [handle] skills\`
-    _Get the skills of an Andelan(fellow)_
+\`/whois [handle] skills\`
+_Get the skills of an Andelan(fellow)_
 
-    \`/whois [handle] placement\`
-    _Get the placement details of an Andelan(fellow)_
+\`/whois [handle] placement\`
+_Get the placement details of an Andelan(fellow)_
 
-    `.trim(),
+`.trim(),
 };
 
 export const badResponse = (responseUrl, message = '') => (
