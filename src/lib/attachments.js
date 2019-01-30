@@ -33,7 +33,7 @@ export const profileTemplate = (profile) => {
       },
       {
         title: 'Location',
-        value: `${location.name}`,
+        value: location && `${location.name}`,
         short: true,
       },
       {
@@ -43,12 +43,12 @@ export const profileTemplate = (profile) => {
       },
       {
         title: 'Phone Number',
-        value: `${phoneNumber}`,
+        value: phoneNumber && `${phoneNumber}`,
         short: true,
       },
       {
         title: 'Role',
-        value: `${roles.map(role => capitalize(role.name)).join(', ')}`,
+        value: roles && `${roles.map(role => capitalize(role.name)).join(', ')}`,
         short: !(roles.length > 3),
       },
     ]),
