@@ -4,6 +4,7 @@ import logger from 'morgan';
 import axios from 'axios';
 import Andelan from './lib/andelan';
 import * as middlewares from './middlewares';
+import keepDynoAwake from './lib/keepDynoAwake';
 
 const server = express();
 
@@ -33,4 +34,5 @@ const port = process.env.PORT || 8008;
 
 server.listen(port, () => {
   console.log(`App started on port ${port}`);
+  keepDynoAwake();
 });
