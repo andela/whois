@@ -38,15 +38,8 @@ export const badResponse = (responseUrl, message = '') => (
 
 export const validateSlashCommand = (req, res, next) => {
   const { text } = req.body;
-  if (!text) {
-    return res
-      .json({ response_type: 'ephemeral', text: response.incorrectCommand })
-      .status(200)
-      .end();
-  }
-
-  // send back a list of commands if the user enters "/whois help"
-  if (text === 'help') {
+  // send back the list of commands
+  if (text === 'help' || (typeof text === 'string' && !text.trim())) {
     return res
       .json({ response_type: 'ephemeral', text: response.help })
       .status(200)
