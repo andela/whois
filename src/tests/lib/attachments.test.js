@@ -10,11 +10,11 @@ describe('Attachment Functions', () => {
     const template = attachments.bioTemplate(mockData.fakeBioData);
     expect(template).toEqual(mockData.expectedBioAttachment);
   });
-  it('should set default bio text as "n/a" in bio attachment when bio text is empty', () => {
+  it('should set default bio text as "" in bio attachment when bio text is empty', () => {
     const fakeBioData = { ...mockData.fakeBioData };
     const expectedBioAttachment = { ...mockData.expectedBioAttachment };
     fakeBioData.bio = '';
-    expectedBioAttachment.text = 'n/a';
+    expectedBioAttachment.text = '';
     const template = attachments.bioTemplate(fakeBioData);
     expect(template).toEqual(expectedBioAttachment);
   });

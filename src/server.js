@@ -24,7 +24,15 @@ server.post('/slash-command',
       text: `*_This is ${andelan.fullName}(${res.locals.userHandle}):_*`,
       attachments: [],
     };
-    res.locals.subCommands.forEach(command => slackResponse.attachments.push(andelan[command]));
+    res.locals.subCommands.forEach((command) => {
+      const attachment = andelan[command];
+      if (attachment && attachment.pretext === 'Bio' && attachment.text) {
+        slackResponse.attachments.push(attachment);
+      }
+      if (attachment && attachment.fields.length) {
+        slackResponse.attachments.push(attachment);
+      }
+    });
     return axios.post(req.body.response_url, JSON.stringify(slackResponse));
   });
 

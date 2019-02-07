@@ -33,6 +33,7 @@ export default class Andelan {
   }
 
   get placement() {
+    if (!this.userData.placement) return null;
     const {
       name,
       placement: {

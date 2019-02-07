@@ -59,7 +59,8 @@ export const bioTemplate = ({ bio, name }) => ({
   fallback: `${name} Bio from AIS`,
   color: '#3359df',
   pretext: 'Bio',
-  text: `${slackifyHtml(bio) || 'n/a'}`,
+  text: `${slackifyHtml(bio) || ''}`,
+  fields: [],
 });
 
 export const placementTemplate = ({

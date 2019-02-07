@@ -62,6 +62,7 @@ export const expectedBioAttachment = {
   color: '#3359df',
   pretext: 'Bio',
   text: '*This is just a mock bio*',
+  fields: [],
 };
 
 export const fakePlacementData = {
