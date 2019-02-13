@@ -57,7 +57,7 @@ export const validateSlashCommand = (req, res, next) => {
   }
   res.locals.userId = userId;
   res.locals.userHandle = userHandle;
-  res.json({ response_type: 'ephemeral', text: `Gethering ${userHandle} data. This might take some seconds.` }).status(200).end();
+  res.json({ response_type: 'ephemeral', text: `Gathering ${userHandle} data. This might take some seconds.` }).status(200).end();
   return next();
 };
 
@@ -85,7 +85,7 @@ export const getUserMail = async (req, res, next) => {
       res.locals.userEmail = email;
       return next();
     })
-    .catch(() => badResponse(responseUrl, ':cry: Something went wrong.'));
+    .catch(() => badResponse(responseUrl, ':cry: Something went wrong..'));
 };
 
 export const getUserInfo = async (req, res, next) => {
@@ -112,7 +112,7 @@ export const getUserInfo = async (req, res, next) => {
       res.locals.subCommands = subCommands;
     }
   } catch (error) {
-    return badResponse(req.body.response_url, ':cry: Something went wrong1');
+    return badResponse(req.body.response_url, ':cry: Something went wrong...', error);
   }
   res.locals.userData = userData;
   res.locals.userSkills = userSkills;

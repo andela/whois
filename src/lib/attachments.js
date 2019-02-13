@@ -28,7 +28,7 @@ export const profileTemplate = (profile) => {
       },
       {
         title: 'Github Handle',
-        value: github && `https://github.com/${github}`,
+        value: github && (github.startsWith('https://github.com') ? github : `https://github.com/${github}`),
         short: true,
       },
       {
@@ -77,7 +77,7 @@ export const placementTemplate = ({
     },
     {
       title: 'Start Date',
-      value: `${new Date(startDate).toDateString()}`,
+      value: startDate && `${new Date(startDate).toDateString()}`,
       short: true,
     },
     {
