@@ -1,3 +1,4 @@
+import 'newrelic';
 import express from 'express';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
