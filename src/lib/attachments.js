@@ -1,4 +1,6 @@
 import slackifyHtml from 'slackify-html';
+// eslint-disable-next-line import/no-cycle
+import Andelan from './andelan';
 
 const removeEmptyFields = fields => (
   fields.filter(field => field.value && field.value.trim() && field.value.toLowerCase() !== 'n/a')
@@ -9,7 +11,7 @@ export const capitalize = word => `${word[0].toUpperCase()}${word.substr(1)}`;
 export const profileTemplate = (profile) => {
   const {
     cohort, email, github, location,
-    level, roles, phoneNumber, name,
+    level, roles, phoneNumber, name, id,
   } = profile;
   return ({
     fallback: `${name} Profile from AIS`,
@@ -50,6 +52,11 @@ export const profileTemplate = (profile) => {
         title: 'Role',
         value: roles && `${roles.map(role => capitalize(role.name)).join(', ')}`,
         short: !(roles.length > 3),
+      },
+      {
+        title: 'AIS Profile Link',
+        value: Andelan.isFellow(roles) && `https://ais.andela.com/people/${id}`,
+        short: false,
       },
     ]),
   });

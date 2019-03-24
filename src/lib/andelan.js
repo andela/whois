@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import axios from 'axios';
+// eslint-disable-next-line import/no-cycle
 import * as attachments from './attachments';
 
 dotenv.config();
@@ -19,10 +20,10 @@ export default class Andelan {
 
   get profile() {
     const {
-      cohort, email, github, location, level, roles, phone_number: phoneNumber, name,
+      cohort, email, github, location, level, roles, phone_number: phoneNumber, name, id,
     } = this.userData;
     const profile = {
-      cohort, email, github, location, level, roles, phoneNumber, name,
+      cohort, email, github, location, level, roles, phoneNumber, name, id,
     };
     return attachments.profileTemplate(profile);
   }
