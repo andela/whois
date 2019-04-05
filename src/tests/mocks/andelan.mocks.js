@@ -1,4 +1,5 @@
 export const userData = {
+  id: 'mock-id',
   name: 'mock-name',
   first_name: 'mock-first-name',
   last_name: 'mock-last-name',
@@ -31,10 +32,10 @@ export const bioData = { bio: userData.bio, name: userData.name };
 
 export const profileData = (() => {
   const {
-    cohort, email, github, location, level, roles, phone_number: phoneNumber, name,
+    cohort, email, github, location, level, roles, phone_number: phoneNumber, name, id,
   } = userData;
   return {
-    cohort, email, github, location, level, roles, phoneNumber, name,
+    cohort, email, github, location, level, roles, phoneNumber, name, id,
   };
 })();
 
