@@ -29,10 +29,6 @@ _Get the placement details of an Andelan(fellow)_
 `.trim(),
 };
 
-export const sendBadResponse = (responseUrl, message = '') => (
-  axios.post(responseUrl, JSON.stringify({ text: message }))
-);
-
 const addDeleteButton = (slackResponse) => {
   // eslint-disable-next-line no-param-reassign
   if (!slackResponse.attachments) slackResponse.attachments = [];
@@ -49,6 +45,12 @@ const addDeleteButton = (slackResponse) => {
       },
     ],
   });
+};
+
+export const sendBadResponse = (responseUrl, message = '') => {
+  const res = { text: message };
+  addDeleteButton(res);
+  return axios.post(responseUrl, JSON.stringify(res));
 };
 
 const validateSlashCommand = (req, res, next) => {
