@@ -119,9 +119,10 @@ const getUserInfo = async (req, res, next) => {
         'Sorry :disappointed:, this user does not have a profile on AIS.',
       );
     }
-    if (Andelan.isFellow(userData.roles) && res.locals.subCommands.includes('skills')) {
+    const andelanIsAFellow = Andelan.isFellow(userData.roles);
+    if (andelanIsAFellow && res.locals.subCommands.includes('skills')) {
       userSkills = await Andelan.getSkillsWithId(userData.id);
-    } else {
+    } else if (!andelanIsAFellow) {
       const subCommands = res.locals.subCommands.filter(command => ['profile', 'bio'].includes(command));
       if (!subCommands.length) {
         return sendBadResponse(
