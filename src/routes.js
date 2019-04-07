@@ -2,11 +2,14 @@ import express from 'express';
 import requestHandlers from './requestHandlers';
 
 const router = express.Router();
+const {
+  verifySlackReq, slashCommand, deleteMessage, ping,
+} = requestHandlers;
 
-router.post('/slash-command', requestHandlers.slashCommand);
+router.post('/slash-command', verifySlackReq, slashCommand);
 
-router.post('/delete-message', requestHandlers.deleteMessage);
+router.post('/delete-message', verifySlackReq, deleteMessage);
 
-router.post('/ping', requestHandlers.ping);
+router.post('/ping', ping);
 
 export default router;
